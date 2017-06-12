@@ -29,6 +29,9 @@ $sub_title = get_field('sub_title');
 $featured_image = get_field('featured_image');
 $location = get_field('google_map');
 $address = get_field('address');
+$city = (get_field('city')) ? : null;
+$state = get_field('state') ? : null;
+$zip = get_field('zip') ? : null;
 $phone_number_1 = get_field('phone_number_1');
 $phone_number_2 = do_shortcode('[AMB_MAIN_PHONE]');
 $post_objects = get_field('staff_members');
@@ -143,56 +146,77 @@ switch($post->ID){
                                     <tr>
                                         <td><i class="fa fa-map-marker" aria-hidden="true"></i></td>
                                         <td>
-                                            <div style="display: none;" itemscope itemtype="http://schema.org/LocalBusiness">
-                                                <span itemprop="name">Ambrosia Treatment Center</span>
-                                            </div>
-                                            <div class="address-container" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                                <?php echo $address; ?>
-                                            </div>
-                                        </td>
-                                        <td><i class="fa fa-phone"></i></td>
-                                        <td>
-                                            <div class="phone1" itemprop="telephone">
-                                                <?php echo $phone_number_1; ?>
-                                            </div>
-                                        </td>
-                                        <td><i class="fa fa-phone"></i></td>
-                                        <td>
-                                            <?php
-                                            if( !empty($phone_number_2)): ?>
-                                                <div class="phone2">
-                                                    <?php echo $phone_number_2; ?> (Admissions)
+                                            <div itemscope itemtype="http://schema.org/LocalBusiness">
+                                                <?php
+                                                $thumbnail_id = get_post_thumbnail_id( $post->ID );
+                                                $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
+                                                ?>
+                                                <div style="display: none;" class="itemscope itemtype="https://schema.org/ImageObject">
+                                                <?php if(has_post_thumbnail()) : echo  '<img itemprop="image" alt="' . $alt . '" src="' . get_the_post_thumbnail_url() . '" >'; endif; ?>
+                                                <link itemprop="url" href="<?php echo curPageURL() ?>">
+                                                <div style="display: none;" itemprop="description">
+                                                    Drug and alcohol addiction treatment center providing world-class service to everyone we treat.
                                                 </div>
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
-                                </table>
+                                            </div>
+                                            <div style="display:none;">
+                                                <span itemprop="name">Ambrosia Treatment Center</span>
+                                                <span itemprop="telephone"><?php echo $phone_number_1; ?></span>
+                                                <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                                    <span itemprop="streetAddress"><?php echo $address; ?></span>
+                                                    <span itemprop="addressLocality"><?php echo $city; ?></span>
+                                                    <span itemprop="addressRegion"><?php echo $state; ?></span>
+                                                    <span itemprop="addressCountry">United States</span>
+                                                </div>
+                                                <span itemprop="priceRange">$</span>
+                                                <img itemprop="logo" src="https://www.ambrosiatc.com/wp-content/uploads/2016/09/amb-bird-icon-2016-1.png" alt="Logo">
+                                            </div>
+
+                                            <?php echo $address . ' ' . $city . ', ' . $state . ' ' . $zip; ; ?>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <?php if( !empty($location) ){ ?>
-                                        <div class="map-container"><div id="map"></div></div>
-                                        <script src='//maps.googleapis.com/maps/api/js?sensor=false' type='text/javascript'></script>
-                                        <script type="text/javascript">
-                                            function locationmap(){
-                                                var myOptions = {
-                                                    zoom:15,
-                                                    center:new google.maps.LatLng(<?php echo $location['lat']; ?>,<?php echo $location['lng']; ?>),
-                                                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                                                };
-                                                map = new google.maps.Map(document.getElementById("map"), myOptions);
-                                                marker = new google.maps.Marker({
-                                                    map: map,
-                                                    position: new google.maps.LatLng(<?php echo $location['lat']; ?>,<?php echo $location['lng']; ?>)
-                                                });
-                                            }
-                                            google.maps.event.addDomListener(window, 'load', locationmap);
-                                        </script>
-                                    <?php } ?>
+                            </td>
+                            <td><i class="fa fa-phone"></i></td>
+                            <td>
+                                <div class="phone1" itemprop="telephone">
+                                    <?php echo $phone_number_1; ?>
                                 </div>
+                            </td>
+                            <td><i class="fa fa-phone"></i></td>
+                            <td>
+                                <?php
+                                if( !empty($phone_number_2)): ?>
+                                    <div class="phone2">
+                                        <?php echo $phone_number_2; ?> (Admissions)
+                                    </div>
+                                <?php endif; ?>
+                            </td>
+                            </tr>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <?php if( !empty($location) ){ ?>
+                                    <div class="map-container"><div id="map"></div></div>
+                                    <script src='//maps.googleapis.com/maps/api/js?sensor=false' type='text/javascript'></script>
+                                    <script type="text/javascript">
+                                        function locationmap(){
+                                            var myOptions = {
+                                                zoom:15,
+                                                center:new google.maps.LatLng(<?php echo $location['lat']; ?>,<?php echo $location['lng']; ?>),
+                                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                                            };
+                                            map = new google.maps.Map(document.getElementById("map"), myOptions);
+                                            marker = new google.maps.Marker({
+                                                map: map,
+                                                position: new google.maps.LatLng(<?php echo $location['lat']; ?>,<?php echo $location['lng']; ?>)
+                                            });
+                                        }
+                                        google.maps.event.addDomListener(window, 'load', locationmap);
+                                    </script>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </section>
             <?php if( !empty( $gallery )){ ?>
@@ -573,7 +597,7 @@ switch($post->ID){
                     </div>
                 <?php endif; ?>
                 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 logos"><img
-                        src="/wp-content/uploads/2015/12/logos.jpg" class="img-preserve" /></div>
+                            src="/wp-content/uploads/2015/12/logos.jpg" class="img-preserve" /></div>
             </section>
         </article><!-- end of #post-<?php the_ID(); ?> -->
     <?php endwhile; ?>
