@@ -27,16 +27,37 @@
                             </div>
                         </div>
                         <div class="copyright">
+                            <div itemscope itemtype="http://schema.org/WebSite" >
+                                <?php
+                                $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                                ?>
+                                <link itemprop="url" href="<?php echo $actual_link; ?>"/>
+                                &copy; <a href="<?php echo $actual_link; ?>"><span itemprop="name">Ambrosia Treatment Center</span></a>
+                                <a href="http://ambrosiatc.com/terms-privacy/">Terms &amp; Privacy</a>
+                                <form style="display: none;" action="search" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+                                    <meta itemprop="target" content="<?php echo $actual_link; ?>search?q={query}"/>
+                                    <input itemprop="query-input" type="text" name="query"/>
+                                </form>
+                                <div style="display: none;" itemscope itemtype="http://schema.org/CreativeWork">
+                                    <a href="/rehab/residential-treatment/"><span itemprop="keywords">Residential Treatment</span></a>,
+                                    <a href="/rehab/outpatient-treatment/"><span itemprop="keywords">Outpatient Treatment</span></a>
+                                    <a href="/rehab/outpatient-treatment/"><span itemprop="keywords">Family Wellness</span></a>
+                                </div>
+                            </div>
+                            <?php /*
                             <?php if( bi_option('custom_copyright') ) : ?>
                                 <?php if(!isset($_GET['nav'])) :
-                                    echo  bi_option('custom_copyright');
-                                else:
-                                    echo str_replace('Reviews', '', bi_option('custom_copyright'));
-                                endif; ?>
+                                        echo  bi_option('custom_copyright');
+                                    else:
+                                        echo str_replace('Reviews', '', bi_option('custom_copyright'));
+                                    endif; ?>
 
                             <?php else : ?>
                                 &copy; <?php _e('Copyright', 'responsive'); ?><?php echo date('Y'); ?><a href="<?php echo home_url(); ?>/" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a>
                             <?php endif; ?>
+
+                              */
+                            ?>
                         </div>
                     </div>
                     <div class="col-md-4">
