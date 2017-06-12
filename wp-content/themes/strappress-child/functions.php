@@ -61,7 +61,7 @@ function cptui_register_my_cpts() {
 		"rewrite" => array( "slug" => "locations", "with_front" => false ),
 		"query_var" => true,
 		"menu_icon" => "dashicons-location-alt",
-		"supports" => array( "title", "trackbacks", "revisions", "post-formats" ),
+		"supports" => array( "title", "trackbacks", "revisions", "post-formats", "thumbnail" ),
 	);
 	register_post_type( "location", $args );
 
