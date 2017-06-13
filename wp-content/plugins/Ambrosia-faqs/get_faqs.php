@@ -23,6 +23,4 @@
 		echo "0 results";
 	}
 	$con->close();
-
-
 ?>
