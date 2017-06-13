@@ -554,14 +554,12 @@ switch($post->ID){
                                     <div class="amb-faq-box off">
                                         <ul itemscope itemtype="http://schema.org/Question">
                                             <li>
-                                                <a itemprop="name text">
-                                                    <?php echo stripslashes(get_field('question', $post->ID)); ?>
+                                                <a>
+                                                    <span itemprop="name text"><?php echo stripslashes(get_field('question', $post->ID)); ?></span>
                                                 </a>
                                                 <ul>
                                                     <li itemprop="suggestedAnswer" itemscope itemtype="http://schema.org/Answer">
-                                                        <div  itemprop="text">
-                                                            <?php echo stripslashes(get_field('answer', $post->ID)); ?>
-                                                        </div>
+                                                        <span itemprop="text"><?php echo stripslashes(get_field('answer', $post->ID)); ?></span>
                                                     </li>
                                                 </ul>
                                             </li>
