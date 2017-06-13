@@ -159,16 +159,16 @@ if($testimonial_category != ''){
                                     <div class="faq-drug-type">
                                         <div class="row">
                                             <div class="col-lg-10 col-lg-offset-1">
-                                                <div class="row">
+                                                <div class="row"  itemscope itemtype="http://schema.org/Question">
                                                     <div class="col-xs-11">
-                                                        <h3 <?php echo $font_size; ?>><?php echo preg_replace('/\-/', ' ', $question); ?></h3>
+                                                        <h3 <?php echo $font_size; ?>  itemprop="text"><?php echo preg_replace('/\-/', ' ', $question); ?></h3>
                                                     </div>
                                                     <div class="col-xs-1">
                                                         <i class="fa fa-arrow-circle-o-right <?php echo $fa_size;?>" data-faq="toggle" id="toggle-faq"></i>
                                                     </div>
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-12" itemprop="suggestedAnswer" itemscope itemtype="http://schema.org/Answer">
                                                         <div class="answer-amb">
-                                                            <?php echo $answer?>
+                                                            <span itemprop="text"><?php echo $answer?></span>
                                                         </div>
                                                     </div>
                                                 </div>
