@@ -62,12 +62,8 @@ while($query->have_posts()) : $query->the_post();
 
     <?php
     $output_html .= <<<EOD
-                    <div class="amb-testimonial-1 ver2" itemscope itemtype="//schema.org/Organization">
-                    <span itemprop="name" style="display:none;">Ambrosia Treatment Center</span>
-                    <div style="display:none;" itemprop="aggregateRating" itemscope itemtype="//schema.org/AggregateRating">
-                        <span itemprop="ratingValue">4.5</span> <span itemprop="reviewCount">7500</span>
-                    </div>
-                    <div itemscope itemtype="http://schema.org/Review">
+                    <div class="amb-testimonial-1 ver2">
+                                <div itemscope itemtype="http://schema.org/Review">
                         <div style="display:none;" itemprop="name">
                             Ambrosia Treatment Center
                         </div>
@@ -77,9 +73,10 @@ while($query->have_posts()) : $query->the_post();
                             </div>
                         </div>
                         <div itemprop="author" itemscope itemtype="http://schema.org/Person">
+                            <img style="display: none;" itemprop="image" href="{$page_data['thumbnail']}" alt="{$page_data['name']}">
                             <span class="at1-name" itemprop="name">{$page_data['name']}</span>
                         </div>
-                        <div itemprop="itemReviewed" itemscope itemtype="http://schema.org/ProfessionalService">
+                        <div itemprop="itemReviewed" itemscope itemtype="http://schema.org/Service">
                             <span style="display:none;" itemprop="name">Treatment Center</span>
                         </div>
                         <span class="at1-description clamp" itemprop="reviewBody">{$page_data['description']}</span>
