@@ -552,10 +552,17 @@ switch($post->ID){
                                     ;
                                     ?>
                                     <div class="amb-faq-box off">
-                                        <ul>
-                                            <li><a><?php echo stripslashes(get_field('question', $post->ID)); ?></a>
+                                        <ul itemscope itemtype="http://schema.org/Question">
+                                            <li>
+                                                <a itemprop="name text">
+                                                    <?php echo stripslashes(get_field('question', $post->ID)); ?>
+                                                </a>
                                                 <ul>
-                                                    <li><?php echo stripslashes(get_field('answer', $post->ID)); ?></li>
+                                                    <li itemprop="suggestedAnswer" itemscope itemtype="http://schema.org/Answer">
+                                                        <div  itemprop="text">
+                                                            <?php echo stripslashes(get_field('answer', $post->ID)); ?>
+                                                        </div>
+                                                    </li>
                                                 </ul>
                                             </li>
                                         </ul>
